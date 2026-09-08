@@ -1,0 +1,10 @@
+﻿path: C:/Users/balaj/OneDrive/Desktop/AI_Exam_Surveillance_System_V2/FINAL_OBJECT_DATASET_BALANCED-20260903T051032Z-1-001/FINAL_OBJECT_DATASET_BALANCED
+train: images/train
+val: images/val
+test: images/test
+nc: 4
+names:
+  - calculator
+  - earphone
+  - sunglasses
+  - watch

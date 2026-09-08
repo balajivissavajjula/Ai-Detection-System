@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>AI Exam Surveillance System V3</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        body {
+            background: #f4f6f9;
+        }
+
+        .main-title {
+            font-weight: 700;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+        }
+
+        .card-header {
+            font-weight: 600;
+        }
+
+        .camera-container {
+            background: #111;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .camera-feed {
+            width: 100%;
+            display: block;
+            min-height: 300px;
+            object-fit: contain;
+            background: #111;
+        }
+
+        .camera-status {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 10;
+        }
+
+        .dashboard-value {
+            font-weight: 600;
+        }
+
+        .status-card {
+            min-height: 105px;
+        }
+
+        .status-icon {
+            font-size: 24px;
+        }
+
+        .violation-number {
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .system-footer {
+            font-size: 13px;
+            color: #777;
+        }
+
+        .section-title {
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .object-badge {
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+
+        #connection_status {
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container-fluid p-3 p-md-4">
+
+
+    <!-- ================================================= -->
+    <!-- HEADER -->
+    <!-- ================================================= -->
+
+    <div class="text-center mb-4">
+
+        <h2 class="main-title text-primary">
+            AI Powered Smart Exam Hall Surveillance System
+        </h2>
+
+        <p class="text-muted mb-0">
+            Real-Time AI Based Examination Monitoring
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+
+        <!-- ================================================= -->
+        <!-- LEFT PANEL -->
+        <!-- ================================================= -->
+
+        <div class="col-lg-4">
+
+
+            <!-- EXAM SETTINGS -->
+
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-header bg-primary text-white">
+                    Exam Settings
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <form
+                        action="/start_exam"
+                        method="POST"
+                        id="examForm">
+
+
+                        <!-- Exam Name -->
+
+                        <label class="form-label fw-semibold">
+                            Exam Name
+                        </label>
+
+                        <input
+                            class="form-control mb-3"
+                            type="text"
+                            name="exam_name"
+                            placeholder="Enter Exam Name"
+                            required>
+
+
+                        <hr>
+
+
+                        <!-- Allowed -->
+
+                        <div class="section-title">
+                            Allowed Items
+                        </div>
+
+
+                        <div class="form-check">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="allowed"
+                                value="calculator"
+                                id="allowCalculator">
+
+                            <label
+                                class="form-check-label"
+                                for="allowCalculator">
+
+                                Calculator
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="form-check">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="allowed"
+                                value="paper"
+                                id="allowPaper">
+
+                            <label
+                                class="form-check-label"
+                                for="allowPaper">
+
+                                Paper
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="form-check">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="allowed"
+                                value="watch"
+                                id="allowWatch">
+
+                            <label
+                                class="form-check-label"
+                                for="allowWatch">
+
+                                Watch
+
+                            </label>
+
+                        </div>
+
+
+                        <hr>
+
+
+                        <!-- Restricted -->
+
+                        <div class="section-title">
+                            Restricted Items
+                        </div>
+
+
+                        <div class="form-check">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="restricted"
+                                value="phone"
+                                id="restrictPhone"
+                                checked>
+
+                            <label
+                                class="form-check-label"
+                                for="restrictPhone">
+
+                                Phone
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="form-check">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="restricted"
+                                value="earphone"
+                                id="restrictEarphone">
+
+                            <label
+                                class="form-check-label"
+                                for="restrictEarphone">
+
+                                Earphone
+
+                            </label>
+
+                        </div>
+
+
+                        <div class="form-check">
+
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                name="restricted"
+                                value="book"
+                                id="restrictBook">
+
+                            <label
+                                class="form-check-label"
+                                for="restrictBook">
+
+                                Book
+
+                            </label>
+
+                        </div>
+
+
+                        <br>
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-success w-100">
+
+                            ▶ Start Exam
+
+                        </button>
+
+
+                    </form>
+
+
+                    <form
+                        action="/stop_exam"
+                        method="POST"
+                        class="mt-2">
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-danger w-100">
+
+                            ■ Stop Exam
+
+                        </button>
+
+
+                    </form>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SYSTEM STATUS -->
+
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-header bg-dark text-white">
+                    System Status
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <div class="d-flex justify-content-between mb-2">
+
+                        <span>
+                            Camera
+                        </span>
+
+                        <span
+                            id="connection_status"
+                            class="badge bg-secondary">
+
+                            Checking...
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="d-flex justify-content-between mb-2">
+
+                        <span>
+                            Exam
+                        </span>
+
+                        <span
+                            id="system_exam_status"
+                            class="badge bg-secondary">
+
+                            STOPPED
+
+                        </span>
+
+                    </div>
+
+
+                    <div class="d-flex justify-content-between">
+
+                        <span>
+                            Current Time
+                        </span>
+
+                        <span id="current_time">
+                            --
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STUDENT -->
+
+            <div class="card shadow-sm">
+
+                <div class="card-header bg-secondary text-white">
+                    Student Information
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <p class="mb-2">
+
+                        <b>Name:</b>
+
+                        <span id="student_name">
+                            --
+                        </span>
+
+                    </p>
+
+
+                    <p class="mb-0">
+
+                        <b>ID:</b>
+
+                        <span id="student_id">
+                            --
+                        </span>
+
+                    </p>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================================================= -->
+        <!-- RIGHT PANEL -->
+        <!-- ================================================= -->
+
+        <div class="col-lg-8">
+
+
+            <!-- CAMERA -->
+
+            <div class="card shadow-sm mb-4">
+
+                <div class="card-header bg-dark text-white">
+
+                    <div class="d-flex justify-content-between">
+
+                        <span>
+                            Live Camera Feed
+                        </span>
+
+                        <span
+                            id="camera_label"
+                            class="badge bg-danger">
+
+                            LIVE
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-body p-2">
+
+
+                    <div class="camera-container">
+
+
+                        <span
+                            class="camera-status badge bg-success">
+
+                            ● LIVE
+
+                        </span>
+
+
+                        <img
+                            src="{{ url_for('video') }}"
+                            class="camera-feed rounded"
+                            id="cameraFeed"
+                            alt="Live Camera Feed">
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================================================= -->
+            <!-- LIVE DASHBOARD -->
+            <!-- ================================================= -->
+
+            <div class="card shadow-sm mb-4">
+
+
+                <div class="card-header bg-success text-white">
+
+                    Live AI Dashboard
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <div class="row g-3">
+
+
+                        <!-- EXAM STATUS -->
+
+                        <div class="col-md-6">
+
+                            <div
+                                class="card status-card bg-light border">
+
+
+                                <div class="card-body">
+
+                                    <div class="text-muted">
+                                        Exam Status
+                                    </div>
+
+                                    <div
+                                        id="exam_status"
+                                        class="dashboard-value fs-5">
+
+                                        STOPPED
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- DETECTED OBJECT -->
+
+                        <div class="col-md-6">
+
+                            <div
+                                class="card status-card bg-light border">
+
+
+                                <div class="card-body">
+
+                                    <div class="text-muted">
+                                        Detected Object
+                                    </div>
+
+                                    <div
+                                        id="detected_object"
+                                        class="dashboard-value fs-5">
+
+                                        NONE
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- OBJECT STATUS -->
+
+                        <div class="col-md-6">
+
+                            <div
+                                class="card status-card bg-light border">
+
+
+                                <div class="card-body">
+
+                                    <div class="text-muted">
+                                        Current Status
+                                    </div>
+
+                                    <div
+                                        id="current_status"
+                                        class="dashboard-value fs-5">
+
+                                        WAITING
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- VIOLATIONS -->
+
+                        <div class="col-md-6">
+
+                            <div
+                                class="card status-card bg-light border">
+
+
+                                <div class="card-body">
+
+                                    <div class="text-muted">
+                                        Total Violations
+                                    </div>
+
+                                    <div
+                                        id="violations"
+                                        class="violation-number text-danger">
+
+                                        0
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================================================= -->
+            <!-- FACE / HEAD / GAZE -->
+            <!-- ================================================= -->
+
+            <div class="card shadow-sm mb-4">
+
+
+                <div class="card-header bg-info text-white">
+
+                    Student Monitoring
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <div class="row g-3">
+
+
+                        <div class="col-md-3">
+
+                            <div class="border rounded p-3 text-center">
+
+                                <div class="text-muted">
+                                    Face Count
+                                </div>
+
+                                <div
+                                    id="face_count"
+                                    class="fs-3 fw-bold">
+
+                                    0
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+                            <div class="border rounded p-3 text-center">
+
+                                <div class="text-muted">
+                                    Face Status
+                                </div>
+
+                                <div
+                                    id="face_status"
+                                    class="fw-bold">
+
+                                    NO FACE
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+                            <div class="border rounded p-3 text-center">
+
+                                <div class="text-muted">
+                                    Head
+                                </div>
+
+                                <div
+                                    id="head_direction"
+                                    class="fw-bold">
+
+                                    FORWARD
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+                            <div class="border rounded p-3 text-center">
+
+                                <div class="text-muted">
+                                    Gaze
+                                </div>
+
+                                <div
+                                    id="gaze_direction"
+                                    class="fw-bold">
+
+                                    CENTER
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ================================================= -->
+            <!-- DETECTION SUMMARY -->
+            <!-- ================================================= -->
+
+            <div class="card shadow-sm">
+
+
+                <div class="card-header bg-warning">
+
+                    Detection Summary
+
+                </div>
+
+
+                <div class="card-body">
+
+
+                    <div class="row">
+
+
+                        <div class="col-md-4">
+
+                            <p class="mb-2">
+
+                                <b>Paper:</b>
+
+                                <span
+                                    id="paper_status"
+                                    class="badge bg-secondary">
+
+                                    NOT DETECTED
+
+                                </span>
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="col-md-4">
+
+                            <p class="mb-2">
+
+                                <b>Phone:</b>
+
+                                <span
+                                    id="phone_status"
+                                    class="badge bg-secondary">
+
+                                    NOT DETECTED
+
+                                </span>
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="col-md-4">
+
+                            <p class="mb-2">
+
+                                <b>Book:</b>
+
+                                <span
+                                    id="book_status"
+                                    class="badge bg-secondary">
+
+                                    NOT DETECTED
+
+                                </span>
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+    <!-- FOOTER -->
+
+    <div class="text-center mt-4 system-footer">
+
+        AI Exam Surveillance System V3
+        |
+        Real-Time YOLO Monitoring
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ========================================================= -->
+
+<script>
+
+
+// ============================================================
+// Helper
+// ============================================================
+
+function setText(id, value) {
+
+    const element = document.getElementById(id);
+
+    if (element) {
+
+        element.textContent =
+            value !== undefined &&
+            value !== null &&
+            value !== ""
+                ? value
+                : "--";
+
+    }
+
+}
+
+
+
+// ============================================================
+// Badge helper
+// ============================================================
+
+function setBadge(id, active, activeText, inactiveText) {
+
+    const element =
+        document.getElementById(id);
+
+    if (!element) {
+        return;
+    }
+
+
+    if (active) {
+
+        element.textContent = activeText;
+
+        element.classList.remove(
+            "bg-secondary"
+        );
+
+        element.classList.add(
+            "bg-danger"
+        );
+
+    } else {
+
+        element.textContent = inactiveText;
+
+        element.classList.remove(
+            "bg-danger"
+        );
+
+        element.classList.add(
+            "bg-secondary"
+        );
+
+    }
+
+}
+
+
+
+// ============================================================
+// Dashboard update
+// ============================================================
+
+let dashboardRequestRunning = false;
+
+
+function updateDashboard() {
+
+
+    // Prevent overlapping requests
+
+    if (dashboardRequestRunning) {
+        return;
+    }
+
+
+    dashboardRequestRunning = true;
+
+
+    fetch(
+        "/dashboard_data",
+        {
+            cache: "no-store"
+        }
+    )
+
+    .then(response => {
+
+        if (!response.ok) {
+
+            throw new Error(
+                "Dashboard request failed"
+            );
+
+        }
+
+        return response.json();
+
+    })
+
+
+    .then(data => {
+
+
+        // ====================================================
+        // Exam
+        // ====================================================
+
+        setText(
+            "exam_status",
+            data.exam_status
+        );
+
+
+        setText(
+            "system_exam_status",
+            data.exam_status
+        );
+
+
+        // ====================================================
+        // Detection
+        // ====================================================
+
+        setText(
+            "detected_object",
+            data.detected_object
+        );
+
+
+        setText(
+            "current_status",
+            data.current_status
+        );
+
+
+        setText(
+            "violations",
+            data.violations
+        );
+
+
+        // ====================================================
+        // Face
+        // ====================================================
+
+        setText(
+            "face_count",
+            data.face_count
+        );
+
+
+        setText(
+            "face_status",
+            data.face_status
+        );
+
+
+        // ====================================================
+        // Head / Gaze
+        // ====================================================
+
+        setText(
+            "head_direction",
+            data.head_direction
+        );
+
+
+        setText(
+            "gaze_direction",
+            data.gaze_direction
+        );
+
+
+        // ====================================================
+        // Student
+        // ====================================================
+
+        setText(
+            "student_name",
+            data.student_name
+        );
+
+
+        setText(
+            "student_id",
+            data.student_id
+        );
+
+
+        // ====================================================
+        // Object badges
+        // ====================================================
+
+        setBadge(
+            "paper_status",
+            data.paper === true,
+            "DETECTED",
+            "NOT DETECTED"
+        );
+
+
+        setBadge(
+            "phone_status",
+            data.phone === true,
+            "DETECTED",
+            "NOT DETECTED"
+        );
+
+
+        setBadge(
+            "book_status",
+            data.book === true,
+            "DETECTED",
+            "NOT DETECTED"
+        );
+
+
+        // ====================================================
+        // Exam badge
+        // ====================================================
+
+        const examBadge =
+            document.getElementById(
+                "system_exam_status"
+            );
+
+
+        if (
+            data.exam_status === "RUNNING"
+        ) {
+
+            examBadge.classList.remove(
+                "bg-secondary"
+            );
+
+            examBadge.classList.add(
+                "bg-success"
+            );
+
+        } else {
+
+            examBadge.classList.remove(
+                "bg-success"
+            );
+
+            examBadge.classList.add(
+                "bg-secondary"
+            );
+
+        }
+
+
+        // ====================================================
+        // Current status color
+        // ====================================================
+
+        const statusElement =
+            document.getElementById(
+                "current_status"
+            );
+
+
+        statusElement.classList.remove(
+            "text-danger",
+            "text-success",
+            "text-warning"
+        );
+
+
+        const status =
+            String(
+                data.current_status || ""
+            ).toUpperCase();
+
+
+        if (
+            status.includes("VIOLATION")
+        ) {
+
+            statusElement.classList.add(
+                "text-danger"
+            );
+
+        }
+
+        else if (
+            status.includes("ALLOWED")
+        ) {
+
+            statusElement.classList.add(
+                "text-success"
+            );
+
+        }
+
+        else {
+
+            statusElement.classList.add(
+                "text-warning"
+            );
+
+        }
+
+
+        // ====================================================
+        // Connection
+        // ====================================================
+
+        const connection =
+            document.getElementById(
+                "connection_status"
+            );
+
+
+        connection.textContent =
+            "CONNECTED";
+
+
+        connection.classList.remove(
+            "bg-secondary",
+            "bg-danger"
+        );
+
+        connection.classList.add(
+            "bg-success"
+        );
+
+
+    })
+
+
+    .catch(error => {
+
+
+        console.log(
+            "Dashboard error:",
+            error
+        );
+
+
+        const connection =
+            document.getElementById(
+                "connection_status"
+            );
+
+
+        connection.textContent =
+            "DISCONNECTED";
+
+
+        connection.classList.remove(
+            "bg-success",
+            "bg-secondary"
+        );
+
+        connection.classList.add(
+            "bg-danger"
+        );
+
+
+    })
+
+
+    .finally(() => {
+
+        dashboardRequestRunning =
+            false;
+
+    });
+
+}
+
+
+
+// ============================================================
+// Clock
+// ============================================================
+
+function updateClock() {
+
+    const now =
+        new Date();
+
+
+    const time =
+        now.toLocaleTimeString();
+
+
+    setText(
+        "current_time",
+        time
+    );
+
+}
+
+
+setInterval(
+    updateClock,
+    1000
+);
+
+
+updateClock();
+
+
+
+// ============================================================
+// Dashboard refresh
+// ============================================================
+
+setInterval(
+    updateDashboard,
+    1000
+);
+
+
+updateDashboard();
+
+
+
+// ============================================================
+// Camera error handling
+// ============================================================
+
+const cameraFeed =
+    document.getElementById(
+        "cameraFeed"
+    );
+
+
+cameraFeed.addEventListener(
+    "error",
+    function() {
+
+
+        const connection =
+            document.getElementById(
+                "connection_status"
+            );
+
+
+        connection.textContent =
+            "CAMERA ERROR";
+
+
+        connection.classList.remove(
+            "bg-success",
+            "bg-secondary"
+        );
+
+        connection.classList.add(
+            "bg-danger"
+        );
+
+
+    }
+);
+
+
+cameraFeed.addEventListener(
+    "load",
+    function() {
+
+
+        const connection =
+            document.getElementById(
+                "connection_status"
+            );
+
+
+        connection.textContent =
+            "CONNECTED";
+
+
+        connection.classList.remove(
+            "bg-danger",
+            "bg-secondary"
+        );
+
+        connection.classList.add(
+            "bg-success"
+        );
+
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>
