@@ -1,0 +1,6 @@
+Book & Mobile Phone Detection
+Precision: 85.57%
+Recall: 78.16%
+mAP@50: 81.94%
+mAP@50-95: 59.95%
+Evaluation: Test – 603 images

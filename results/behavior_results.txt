@@ -1,0 +1,17 @@
+Exam Behavior Detection – Baseline
+Precision: 55.68%
+Recall: 82.55%
+mAP@50: 69.89%
+mAP@50-95: 44.95%
+
+Exam Behavior Detection – Improved
+Precision: 40.20%
+Recall: 76.00%
+mAP@50: 55.38%
+mAP@50-95: 38.58%
+
+Exam Behavior – 90 Dataset Training
+Precision: 68.90%
+Recall: 52.50%
+mAP@50: 66.40%
+mAP@50-95: 41.80%

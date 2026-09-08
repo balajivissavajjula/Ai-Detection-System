@@ -1,0 +1,23 @@
+Paper Detection
+Precision: 82.00%
+Recall: 85.00%
+mAP@50: 84.00%
+mAP@50-95: 76.00%
+
+Face Detection / Tracking
+Precision: 87.96%
+Recall: 92.62%
+mAP@50: 95.22%
+mAP@50-95: 91.70%
+
+Hand Detection
+Precision: 98.43%
+Recall: 100.00%
+mAP@50: 99.50%
+mAP@50-95: 92.99%
+
+System-level Result
+Precision: 93.33%
+Recall: 90.00%
+mAP@50: 90.00%
+mAP@50-95: 80.00%
