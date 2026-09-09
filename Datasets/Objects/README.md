@@ -1,20 +1,24 @@
 # Object Detection Dataset
 
-AI exam surveillance system lo classroom objects ni detect cheyyadaniki use chesina dataset.
+This dataset is used to detect unauthorized objects in an examination environment.
 
 ## Classes
+
 - calculator
 - earphone
 - sunglasses
 - watch
 
 ## Purpose
-Exam hall lo unauthorized objects ni automatically detect cheyyadam.
+
+The dataset is designed to automatically detect potentially unauthorized objects during examinations.
 
 ## Model
+
 YOLOv8
 
 ## Performance
+
 - Precision: 98.57%
 - Recall: 98.05%
 - mAP@50: 99.15%

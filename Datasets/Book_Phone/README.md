@@ -1,23 +1,28 @@
-# Book & Mobile Phone Dataset
+# Book and Mobile Phone Dataset
 
-AI exam surveillance system lo **book** mariyu **mobile phone** objects ni detect cheyyadaniki use chesina dataset.
+This dataset is used to detect books and mobile phones in an examination environment.
 
 ## Classes
+
 - book
 - phone
 
 ## Purpose
-Exam environment lo unauthorized books/mobile phone usage ni detect cheyyadam.
+
+The dataset is designed to identify unauthorized books and mobile phones during examinations.
 
 ## Dataset Structure
-- train
-- valid
-- test
+
+- Train
+- Validation
+- Test
 
 ## Model
+
 YOLOv8
 
 ## Performance
+
 - Precision: 85.57%
 - Recall: 78.16%
 - mAP@50: 81.94%

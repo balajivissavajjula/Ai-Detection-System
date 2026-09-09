@@ -1,8 +1,9 @@
-# Paper, Face & Hand Dataset
+# Paper, Face and Hand Dataset
 
-AI exam surveillance system lo **paper, face, and hand gestures** ni detect cheyyadaniki use chesina dataset.
+This dataset is used to detect paper, faces, and hand gestures in an examination environment.
 
 ## Classes
+
 - paper
 - Face
 - fist
@@ -14,13 +15,17 @@ AI exam surveillance system lo **paper, face, and hand gestures** ni detect chey
 - thumbs_up
 
 ## Purpose
-Exam environment lo suspicious paper usage, face presence, and hand gestures ni detect cheyyadam.
+
+The dataset supports detection of suspicious paper usage, faces, and hand gestures during examinations.
 
 ## Model
+
 YOLOv8
 
 ## Evaluation
+
 Test-set performance is documented in the project evaluation results.
 
 ## Note
-This repository contains dataset metadata and configuration only. The full image dataset is maintained separately.
+
+This repository contains dataset metadata and configuration files only. The complete image dataset is maintained separately.
