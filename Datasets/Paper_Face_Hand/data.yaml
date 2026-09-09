@@ -1,0 +1,16 @@
+path: .
+train: images/train
+val: images/val
+test: images/test
+
+nc: 9
+names:
+- paper
+- Face
+- fist
+- index_left
+- index_right
+- open_palm
+- point
+- thumbs_down
+- thumbs_up

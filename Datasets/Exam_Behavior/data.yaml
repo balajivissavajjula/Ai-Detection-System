@@ -1,0 +1,12 @@
+path: .
+train: images/train
+val: images/val
+test: test/images
+
+nc: 5
+names:
+- cheating
+- normal
+- cheat_paper
+- look_around
+- use_phone

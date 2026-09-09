@@ -1,0 +1,11 @@
+path: .
+train: images/train
+val: images/val
+test: images/test
+
+nc: 4
+names:
+- calculator
+- earphone
+- sunglasses
+- watch
